@@ -10,6 +10,9 @@ public class Window {
         Screen screen = new Screen();
     }
 
+    /**
+     * Handles rendering the window
+     */
     public static class Screen extends JFrame {
         public Screen() {
             int height = 620;
@@ -31,16 +34,27 @@ public class Window {
                 @Override
                 public void mousePressed(MouseEvent e) {
                     Point2D click = new Point2D.Double(e.getX(), e.getY());
-                    System.out.println(e.getX() + " " + e.getY());
+
+                    int count = 0;
+                    Hexagon save = null;
+                    //Loops through all tiles and checks if any are clicked
                     for (int i = 0; i < board.length; i++) {
                         for (int j = 0; j < board[0].length; j++) {
                             Hexagon tile = board[i][j];
                             if (tile.collision(click) && !tile.getIsPressed()){
+                                count++;
+                                save = tile;
                                 tile.setIsPressed();
                                 tile.setColor(new Color(51, 4, 51));
                                 canvas.repaint();
                             }
                         }
+                    }
+                    //Checks if multiple tiles have been clicked
+                    if (count == 1){
+                        save.setIsPressed();
+                        save.setColor(new Color(51, 4, 51));
+                        canvas.repaint();
                     }
                 }
             });

@@ -170,10 +170,12 @@ public class Hexagon {
      * @return true if point is within radius of tile
      */
     public boolean collision(Point2D point){
-        double distance = 0;
+//        double distance = 0;
+//
+//        distance = Math.sqrt(Math.pow(Math.abs(point.getX() - this.center.getX()), 2) + Math.pow(Math.abs(point.getY() - this.center.getY()), 2));
+//
+//        return (distance <= radius);
 
-        distance = Math.sqrt(Math.pow(Math.abs(point.getX() - this.center.getX()), 2) + Math.pow(Math.abs(point.getY() - this.center.getY()), 2));
-
-        return (distance <= radius);
+        return hexagon.contains(point);
     }
 }

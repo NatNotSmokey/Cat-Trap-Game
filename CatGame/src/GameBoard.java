@@ -5,24 +5,30 @@ import java.util.ArrayList;
 public class GameBoard {
 
     private Hexagon[][] board;
-    private ArrayList<Point2D> centers = new ArrayList<>();
     private Hexagon tile;
     private int spacing;
     private int offsetX;
     private int offsetY;
 
-    public GameBoard(int rows, int columns, Hexagon tile, int offsetX, int offsetY, int spacing){
+    /**
+     * GameBoard constructor.
+     * @param rows number of rows on game board
+     * @param columns number of columns on game board
+     * @param tile reference tile to duplicate for all board tiles
+     * @param spacing spacing between tiles
+     */
+    public GameBoard(int rows, int columns, Hexagon tile,int offsetX, int offsetY, int spacing){
         board = new Hexagon[rows][columns];
         this.tile = tile;
+        this.spacing = spacing;
         this.offsetX = offsetX;
         this.offsetY = offsetY;
-        this.spacing = spacing;
 
         for (int i = 0; i < rows; i++){
             for (int j = 0; j < columns; j++){
                 if(i%2 != 0){
                     board[i][j] = new Hexagon(tile,
-                            j * (tile.getWidth() + tile.getLength() + spacing) + spacing/2 + offsetX + tile.getWidth()/2
+                            j * (tile.getWidth() + tile.getLength() + spacing) + offsetX + spacing/2 + tile.getWidth()/2
                                     + (Math.sin(Math.toRadians(30)) * (tile.getLength())/Math.sin(Math.toRadians(90))) ,
                             i * (tile.getHeight() + spacing)/2 + offsetY);
                 } else {
@@ -30,7 +36,6 @@ public class GameBoard {
                             j * (tile.getWidth() + tile.getLength() + spacing) + offsetX,
                             i * (tile.getHeight() + spacing)/2 + offsetY);
                 }
-                centers.add(board[i][j].getCenter());
             }
         }
     }
@@ -39,10 +44,10 @@ public class GameBoard {
         return board;
     }
 
-    public ArrayList<Point2D> getCenters() {
-        return centers;
-    }
-
+    /**
+     * Draws each hexagon tile
+     * @param g2d canvas graphic
+     */
     public void drawBoard(Graphics2D g2d){
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[0].length; j++) {
