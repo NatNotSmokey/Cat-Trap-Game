@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.geom.Path2D;
 import java.awt.geom.Point2D;
+import java.util.ArrayList;
 
 public class Hexagon {
 
@@ -12,6 +13,7 @@ public class Hexagon {
     private Point2D center;
     private double radius;
     private boolean isPressed;
+    private int score = 0;
 
     /**
      * Creates new hexagon
@@ -91,11 +93,21 @@ public class Hexagon {
     public Boolean getIsPressed(){
         return isPressed;
     }
+    public int getScore() {
+        return score;
+    }
     public void setColor(Color color){
         this.color = color;
     }
     public void setIsPressed(){
         isPressed = true;
+        setColor(new Color(51, 4, 51));
+    }
+    public void setScore(int i){
+        this.score = i;
+    }
+    public void addScore(int i){
+        this.score += i;
     }
 
     /**
@@ -161,7 +173,8 @@ public class Hexagon {
         g2d.fill(hexagon);
         g2d.setColor(Color.black);
         g2d.draw(hexagon);
-        g2d.drawLine((int)(center.getX()), (int)(center.getY()), (int)(center.getX()), (int)(center.getY()));
+        g2d.setColor(Color.WHITE);
+        g2d.drawString("" + score, (int) getCenter().getX(), (int) getCenter().getY());
     }
 
     /**
@@ -170,12 +183,6 @@ public class Hexagon {
      * @return true if point is within radius of tile
      */
     public boolean collision(Point2D point){
-//        double distance = 0;
-//
-//        distance = Math.sqrt(Math.pow(Math.abs(point.getX() - this.center.getX()), 2) + Math.pow(Math.abs(point.getY() - this.center.getY()), 2));
-//
-//        return (distance <= radius);
-
         return hexagon.contains(point);
     }
 }

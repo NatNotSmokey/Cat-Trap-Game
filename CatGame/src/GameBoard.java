@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class GameBoard {
 
@@ -24,6 +25,7 @@ public class GameBoard {
         this.offsetX = offsetX;
         this.offsetY = offsetY;
 
+        //Creates all tiles and properly spaces them
         for (int i = 0; i < rows; i++){
             for (int j = 0; j < columns; j++){
                 if(i%2 != 0){
@@ -36,6 +38,21 @@ public class GameBoard {
                             j * (tile.getWidth() + tile.getLength() + spacing) + offsetX,
                             i * (tile.getHeight() + spacing)/2 + offsetY);
                 }
+            }
+        }
+
+        //Randomly sets a random amount of tiles as pressed
+        //Currently, same tiles can be rolled twice, nothing happens in that case
+        int random = ThreadLocalRandom.current().nextInt(9, 15);
+        for(int i = 0; i <= random; i++){
+
+            int ranX = ThreadLocalRandom.current().nextInt(0, 15);
+            int ranY = ThreadLocalRandom.current().nextInt(0, 7);
+            System.out.println("Tile " + ranX + ", " + ranY);
+
+            //Makes sure a tile cant be pressed on the cats starting position
+            if(ranX != 7 && ranY != 3){
+                board[ranX][ranY].setIsPressed();
             }
         }
     }

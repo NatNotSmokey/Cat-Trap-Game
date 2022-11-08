@@ -42,20 +42,24 @@ public class Window {
                         for (int j = 0; j < board[0].length; j++) {
                             Hexagon tile = board[i][j];
                             if (tile.collision(click) && !tile.getIsPressed()){
-                                count++;
-                                save = tile;
-                                tile.setIsPressed();
-                                tile.setColor(new Color(51, 4, 51));
-                                canvas.repaint();
+
+                                if (i == canvas.getCat().getX() && j == canvas.getCat().getY()){
+                                    break;
+                                } else {
+                                    count++;
+                                    save = tile;
+                                    System.out.println("Tile " + i + ", " + j);
+                                }
                             }
                         }
                     }
                     //Checks if multiple tiles have been clicked
                     if (count == 1){
                         save.setIsPressed();
-                        save.setColor(new Color(51, 4, 51));
+                        boolean moved = canvas.getCat().move();
                         canvas.repaint();
                     }
+
                 }
             });
         }
