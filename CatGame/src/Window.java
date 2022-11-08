@@ -14,22 +14,24 @@ public class Window {
         public Screen() {
             int height = 620;
             int width = 950;
+            JPanel p = new JPanel();
             JFrame window = new JFrame();
 
             Canvas canvas = new Canvas(width, height);
             Hexagon[][] board = canvas.getBoard().getBoard();
 
-
-            window.setSize(width, height);
-            window.add(canvas);
+            p.add(canvas);
+            window.add(p);
             window.setTitle("Window");
             window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            window.setSize(width, height);
             window.setVisible(true);
 
-            window.addMouseListener(new MouseAdapter() {
+            p.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mousePressed(MouseEvent e) {
                     Point2D click = new Point2D.Double(e.getX(), e.getY());
+                    System.out.println(e.getX() + " " + e.getY());
                     for (int i = 0; i < board.length; i++) {
                         for (int j = 0; j < board[0].length; j++) {
                             Hexagon tile = board[i][j];
