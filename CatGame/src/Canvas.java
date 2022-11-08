@@ -11,7 +11,9 @@ public class Canvas extends JComponent{
         width = w;
         height = h;
         board = new GameBoard(16, 8, new Hexagon(100, 100, 35, new Color(103, 21, 227)), 35,20 , 4);
-
+        Dimension d = new Dimension();
+        d.setSize(w, h);
+        setPreferredSize(d);
     }
 
     public GameBoard getBoard(){
