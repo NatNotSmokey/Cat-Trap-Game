@@ -7,6 +7,7 @@ public class Canvas extends JComponent{
     private int height;
     private GameBoard board;
     private Cat cat;
+    private ScoreManager manager;
 
     /**
      * Basic Constructor
@@ -17,7 +18,10 @@ public class Canvas extends JComponent{
         width = w;
         height = h;
         board = new GameBoard(15, 7, new Hexagon(100, 100, 35, new Color(103, 21, 227)),35,15, 4);
-        cat = new Cat(7, 3, board);
+        manager = new ScoreManager(board);
+        cat = new Cat(7, 3, board, manager);
+
+        board.setRandomTiles();
 
         Dimension d = new Dimension();
         d.setSize(w, h);
@@ -27,9 +31,11 @@ public class Canvas extends JComponent{
     public GameBoard getBoard(){
         return board;
     }
-
     public Cat getCat() {
         return cat;
+    }
+    public ScoreManager getManager(){
+        return manager;
     }
 
     /**

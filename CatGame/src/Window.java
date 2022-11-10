@@ -49,6 +49,7 @@ public class Window {
                                     count++;
                                     save = tile;
                                     System.out.println("Tile " + i + ", " + j);
+                                    canvas.getManager().updateTiles(i,j);
                                 }
                             }
                         }

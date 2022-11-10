@@ -102,6 +102,7 @@ public class Hexagon {
     public void setIsPressed(){
         isPressed = true;
         setColor(new Color(51, 4, 51));
+        setScore(0);
     }
     public void setScore(int i){
         this.score = i;
